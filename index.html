@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet">
+    <!-- Local Style Sheet and materialize css -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <!-- icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>GIFTR-PWA</title>
+</head>
+<body>
+<!-- Fixed Navigation: Login, Registration buttons-->
+    <div class="navbar-fixed" id="navigation">
+      <nav role="navigation">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo left">Giftr</a>
+          <ul id="mobile-nav desktop-nav" class="right">
+            <li><a href="#register" data-target="register-form" class="waves-effect waves-light sidenav-trigger register">Register</a></li>
+            <li><a href="#login" data-target="login-form" class="waves-effect waves-light sidenav-trigger login">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+<!--  -->
+<!-- LogOut: Navigation when user is Loged in -->
+<template>
+<div class="navbar-fixed" id="navigation">
+    <nav role="navigation">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo left">Giftr</a>
+        <ul id="nav-mobile" class="right">
+          <li><a href="#">LogOut</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</template>
+<!--  -->
+
+<main>
+
+<!-- Welcome Card: When user is not logged in -->
+    <div class="row" id="welcomeCard">
+        <div class="col s12 m6">
+          <div class="card grey lighten-2 WelcomeCard">
+            <div class="card-content black-text">
+              <span class="card-title">Welcome!</span>
+              <p>You are required to Login or Register to be able to see the list of profiles .<br><br>
+                <em>click on the navigation above.</em>
+            </div>
+          </div>
+        </div>
+    </div>
+
+<!-- This is the Login-form Sidenav it is triggered when user clicks 0n login btn -->
+    <div id="login-form" class="sidenav login-form">
+        <h4>Login</h4>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">email</i>
+              <input id="email" type="text" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">security</i>
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <a class="loginAndRegisterbtn waves-effect waves-light btn-small red darken-3 right">Login</a>
+    </div>
+
+<!-- This is the Register-form sidenav, it is triggered when user clicks on register btn -->
+    <div id="register-form" class="sidenav register-form">
+          <h4>Register</h4>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">person</i>
+              <input id="name" type="text" class="validate">
+              <label for="name">First Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">person_outline</i>
+              <input id="name" type="text" class="validate">
+              <label for="name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">email</i>
+              <input id="email" type="text" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">security</i>
+              <input id="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <a class="loginAndRegisterbtn waves-effect waves-light btn-small red darken-3 right">Register</a>
+    </div>
+
+
+
+
+
+</main>
+
+
+ <!-- Local Javascript and materialize -->
+ <script src="./js/materialize.min.js"></script>
+ <script src="./js/main.js"></script>
+</body>
+</html>
