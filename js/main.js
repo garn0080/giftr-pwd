@@ -2,7 +2,7 @@ const app = {
 
     url: "https://giftr.mad9124.rocks/",
     tokenKey: "TOKEN",
-
+    TOKEN: null,
     init: function(){
         app.welcomePage();
         app.authenticationForms(); 
@@ -145,9 +145,10 @@ const app = {
 
         header.appendChild(div); // logOut navigation
 
-        let token = JSON.parse(sessionStorage.getItem(app.tokenKey)); // get people data
+        let token = JSON.parse(sessionStorage.getItem(app.tokenKey)); // get user token
+        app.TOKEN = token;
         let headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`);
+        headers.append('Authorization', `Bearer ${app.TOKEN}`);
         
         let url = `${app.url}api/people`;
 
@@ -164,7 +165,8 @@ const app = {
             if (people.data.length == 0 ){
                 app.noPeopleYet();
             }else{
-                //hacer esto despues
+                app.personAlreadyStored();
+                //hacer esto despues si hay personas creadas en la base de datos
             }
         })
         .catch(err => console.log(err))
@@ -177,6 +179,61 @@ const app = {
         let div = temp.content.cloneNode(true);
         main.appendChild(div);
 
+        app.addPerson();  
+    },
+
+    personAlreadyStored: function() {
+        let main = document.querySelector('main');
+        let temp = document.getElementById('personList');
+        let div = temp.content.cloneNode(true);
+        main.appendChild(div);
+
+        app.addPerson();  
+    },
+
+
+    addPerson: function() {
+         // float button initialization
+        var elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems);
+
+        let saveBtn = document.getElementById("savebtn");
+        saveBtn.addEventListener("click", sendPersonData);
+
+        function sendPersonData() {
+
+            let fullName = document.getElementById('fullName').value;
+            let birthday = document.getElementById('birthday').value;
+
+            let headers = new Headers();
+            headers.append('X-Made-By-Mariana', 'true');
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', `Bearer ${app.TOKEN}`);
+    
+            let url = `${app.url}api/people`;
+    
+            let data = {
+                name: fullName,
+                birthDate: birthday
+            };
+    
+            let req = new Request(url, {
+            headers: headers,
+            body: JSON.stringify(data),
+            mode: 'cors',
+            method: 'POST'
+            });
+
+            fetch(req)
+            .then(resp => resp.json())
+            .then( person => {
+            console.log(person)
+            })
+            .catch(err => console.log(err))
+
+
+        }
+     
     }
 
 
