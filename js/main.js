@@ -202,6 +202,7 @@ const app = {
         let birthdayList = document.getElementById("birthdayList");
         peopleArray.forEach(element => {
 
+            
             // set  and format Time
             let day = new Date(element.birthDate);
             let formatted = new Intl.DateTimeFormat('en-CA', { timeZone:'UTC', month: 'long',day: 'numeric'}).format(day);
@@ -277,7 +278,6 @@ const app = {
                 app.personAlreadyStored();
                 
             }
-
             let data = person.data;
             paintPerson(data);
 
@@ -287,31 +287,35 @@ const app = {
         }
 
         function paintPerson(data) {        //Paint person from float button request
-               // set  and format Time
-               let birthdayList = document.getElementById("birthdayList");
-               let day = new Date(data.birthDate);
-               let formatted = new Intl.DateTimeFormat('en-CA', { timeZone:'UTC', month: 'long',day: 'numeric'}).format(day);
-   
-               let li = document.createElement('li'); //Create li to store name and birthday.
-               let div = document.createElement('div');
-               let name = document.createElement('h6');
-               let birthday = document.createElement('p');
-               let temp = document.getElementById('listIcons');
-               let listIcons = temp.content.cloneNode(true);
-   
-               li.setAttribute("class", "collection-item"); 
-               li.setAttribute('id', 'personContainer');
-               li.setAttribute('data-id', `${data._id}`);
-               name.textContent = data.name;
-               birthday.textContent = formatted;
-   
-               div.appendChild(name);
-               div.appendChild(birthday);
-               li.appendChild(div);
-               li.appendChild(listIcons);
-               birthdayList.appendChild(li); // append to html div
 
-               app.deletePerson();
+        // set  and format Time
+        let birthdayList = document.getElementById("birthdayList");
+        let day = new Date(data.birthDate);
+        let formatted = new Intl.DateTimeFormat('en-CA', { timeZone:'UTC', month: 'long',day: 'numeric'}).format(day);
+   
+        let li = document.createElement('li'); //Create li to store name and birthday.
+        let div = document.createElement('div');
+        let name = document.createElement('h6');
+        let birthday = document.createElement('p');
+        let temp = document.getElementById('listIcons');
+        let listIcons = temp.content.cloneNode(true);
+   
+        li.setAttribute("class", "collection-item"); 
+        li.setAttribute('id', 'personContainer');
+        li.setAttribute('data-id', `${data._id}`);
+        name.textContent = data.name;
+        birthday.textContent = formatted;
+   
+        div.appendChild(name);
+        div.appendChild(birthday);
+        li.appendChild(div);
+        li.appendChild(listIcons);
+        birthdayList.appendChild(li); // append to html div
+
+        
+
+        app.deletePerson();
+
         }
      
     },
@@ -319,24 +323,27 @@ const app = {
     deletePerson: function() {
 
         let deletebtn = document.querySelectorAll('#trash');
-        deletebtn.forEach( icon => {
-            icon.addEventListener('click', deletePerson);
-        })
-        
+        deletebtn.forEach( (icon) => {app.deleteSomeone(icon)})
+    },
 
-        function deletePerson(){
+    deleteSomeone: function(element){
+
+        element.addEventListener('click', () => { 
+            let parent = element.parentNode.parentNode;
+            let id = parent.getAttribute('data-id');
+            console.log(id);
 
             let headers = new Headers();
             headers.append('X-Made-By-Mariana', 'true');
             headers.append('Content-Type', 'application/json');
             headers.append('Authorization', `Bearer ${app.TOKEN}`);
     
-            let url = `${app.url}api/people`;
+            let url = `${app.url}api/people/${id}`;
     
             let req = new Request(url, {
             headers: headers,
             mode: 'cors',
-            method: 'DELETE'
+            method: 'DELETE'    // delete from Database
             });
 
             fetch(req)
@@ -345,15 +352,20 @@ const app = {
             console.log(person)})
             .catch(console.error)
 
-        }
+            parent.parentNode.removeChild(parent); // delete from screen
 
-
-
-
-
-
+        } )
+            
 
     }
+
+
+
+
+
+
+
+    
 
 
 
