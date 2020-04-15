@@ -61,11 +61,7 @@ nav .sidenav-trigger{
 .noPeopleYet {
     border-radius: 10px !important;
 }
-.float{
-    /* position: absolute;
-    top: 85%;
-    left: 75% */
-}
+
 .plusIcon{
     font-size: 40px;
 }

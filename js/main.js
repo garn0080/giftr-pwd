@@ -169,6 +169,7 @@ const app = {
                 main.setAttribute('data-status', 'personAlreadyStored');
                 app.personAlreadyStored();
                 app.paintList(people);
+
                 app.addPerson(); 
                 //hacer esto despues si hay personas creadas en la base de datos
             }
@@ -182,7 +183,7 @@ const app = {
         let temp = document.getElementById('noPeopleYet');
         let div = temp.content.cloneNode(true);
         main.appendChild(div);
-
+    
         app.addPerson();  
     },
 
@@ -228,6 +229,7 @@ const app = {
         });
 
         app.deletePerson();
+        app.addGift();
 
     },
 
@@ -315,6 +317,7 @@ const app = {
         
 
         app.deletePerson();
+        app.addGift();
 
         }
      
@@ -324,6 +327,11 @@ const app = {
 
         let deletebtn = document.querySelectorAll('#trash');
         deletebtn.forEach( (icon) => {app.deleteSomeone(icon)})
+    },
+    addGift: function(){
+
+        let giftIcon = document.querySelectorAll('#gift');
+        giftIcon.forEach( (icon) => {app.goGifts(icon)})
     },
 
     deleteSomeone: function(element){
@@ -356,8 +364,23 @@ const app = {
 
         } )
             
+    },
 
+    goGifts: function(element) {
+
+        element.addEventListener('click', () => {
+            let parent = element.parentNode.parentNode.parentNode;
+            let id = parent.getAttribute('data-id');
+            console.log(id);
+            let personid = JSON.stringify(id);
+
+            sessionStorage.setItem('person-ID', `${personid}`);
+
+        })
+        // quede en mandar el id the el div selecionado al session storage para
+        //despues usarlo en la otra pagina gifts.html
     }
+
 
 
 

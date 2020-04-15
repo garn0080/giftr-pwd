@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet">
+    <!-- Local Style Sheet and materialize css -->
+    <link rel="stylesheet" href="/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Giftr</title>
+</head>
+<body>
+    <header>
+    <!-- logout Nav -->
+    <div class="logOut">
+        <div class="navbar-fixed" id="navigation">
+            <nav role="navigation">
+              <div class="nav-wrapper">
+                <a href="#" class="brand-logo left">Giftr</a>
+                <ul id="nav-mobile" class="right">
+                  <li><a href="#">LogOut</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+    </div>
+    </header>
+<!-- MAIN CONTENT -->
+<main></main>  
+
+
+<!-- noGiftsYet -->
+<template id="noGiftsYet">
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card grey lighten-2 noPeopleYet">
+            <div class="card-content black-text">
+              <span class="card-title">No Gift ideas yet</span>
+              <p>Click on + button to add a gift.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fixed-action-btn">
+      <a data-target="peopleForm" class="btn modal-trigger btn-floating btn-large waves-effect 
+      waves-light pink lighten-4 float">
+        <i class="plusIcon material-icons black-text">add</i> 
+      </a>
+      </div>
+</template>
+
+<!-- GIFTS already stored in dataBase -->
+<template>
+    <ul class="collection with-header">
+        <li class="collection-header"><h4 class="peopleTitle">gifts</h4></li>
+        <div id="giftsList">
+        <!-- List painted in javascript -->
+        </div>
+      </ul>
+      <div class="fixed-action-btn">
+      <a data-target="peopleForm" class="btn modal-trigger btn-floating btn-large waves-effect 
+      waves-light pink lighten-4 float">
+        <i class="plusIcon material-icons black-text">add</i> 
+      </a>
+    </div>
+
+</template>
+
+
+</body>
+<script src="/js/gifts.js"></script>
+</html>
