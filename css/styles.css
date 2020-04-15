@@ -58,14 +58,14 @@ nav .sidenav-trigger{
     color: #000000;
 }
 /* no people card */
-.noPeopleYet {
+.noPeopleYet, .noGiftsYet {
     border-radius: 10px !important;
 }
 
 .plusIcon{
     font-size: 40px;
 }
-.personForm{
+.personForm, .giftForm{
     padding: 10px;
 }
 .fullName{
@@ -74,7 +74,7 @@ nav .sidenav-trigger{
 .modal-footer{
     padding-right: 20px !important;
 }
-.peopleTitle{
+.peopleTitle, .giftsTitle{
     font-family: 'Signika', sans-serif;
 }
 .collection-item{
