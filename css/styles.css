@@ -4,7 +4,7 @@ body, html{
     height: 100vh;
 }
 nav{
-    background-color: #c53737 ;
+    background-color: #000000 ;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -32,7 +32,7 @@ main{
 nav .sidenav-trigger{ 
     margin: 0px;
 }
-h4, h5{
+.title{
     text-align: center;
     margin: 10px;
     font-family: 'Signika', sans-serif;
@@ -55,16 +55,16 @@ h4, h5{
     top: 350px;
     left: 40%;
     font-family: 'Signika', sans-serif;
-    color: #b14242;
+    color: #000000;
 }
 /* no people card */
 .noPeopleYet {
     border-radius: 10px !important;
 }
 .float{
-    position: absolute;
+    /* position: absolute;
     top: 85%;
-    left: 75%
+    left: 75% */
 }
 .plusIcon{
     font-size: 40px;
@@ -77,4 +77,32 @@ h4, h5{
 }
 .modal-footer{
     padding-right: 20px !important;
+}
+.peopleTitle{
+    font-family: 'Signika', sans-serif;
+}
+.collection-item{
+    padding-left: 20px !important;
+}
+.collection-item h6 {
+    color: #2196f3;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.collection-item p {
+    margin: 10px 0px;
+}
+#personContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.listIcons{
+    padding-top: 10px;
+}
+.small{
+    margin: 0px 0px 0px 15px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 32px !important;
 }

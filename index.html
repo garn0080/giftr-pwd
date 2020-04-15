@@ -61,7 +61,7 @@
 <!-- Welcome Card: When user is not logged in -->
     <div class="row" id="welcomeCard">
         <div class="col s12 m6">
-          <div class="card grey lighten-2 WelcomeCard">
+          <div class="card blue lighten-4 WelcomeCard">
             <div class="card-content blck-text">
               <span class="card-title">Welcome!</span>
               <p>You are required to Login or Register to be able to see the list of profiles .<br><br>
@@ -73,7 +73,7 @@
 
 <!-- This is the Login-form Sidenav it is triggered when user clicks 0n login btn -->
     <div id="login-form" class="sidenav login-form">
-        <h4>Login</h4>
+        <h4 class="title">Login</h4>
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">email</i>
@@ -88,12 +88,12 @@
               <label for="loginPassword">Password</label>
             </div>
           </div>
-          <a id="loginbtn"class="loginAndRegisterbtn waves-effect waves-light btn-small red darken-3 right">Login</a>
+          <a id="loginbtn"class="loginAndRegisterbtn waves-effect waves-light btn-small blue lighten-4 black-text right">Login</a>
     </div>
 
 <!-- This is the Register-form sidenav, it is triggered when user clicks on register btn -->
     <div id="register-form" class="sidenav register-form">
-          <h4>Register</h4>
+          <h4 class="title">Register</h4>
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">person</i>
@@ -122,14 +122,14 @@
               <label for="registerPassword">Password</label>
             </div>
           </div>
-          <a id="registerbtn"class="loginAndRegisterbtn waves-effect waves-light btn-small red darken-3 right">Register</a>
+          <a id="registerbtn"class="loginAndRegisterbtn waves-effect waves-light btn-small blue lighten-4 black-text right">Register</a>
     </div>
   </template>
 
 <!-- Loading -->
 <template id="loading">
   <div class="preloader-wrapper active loading">
-    <div class="spinner-layer spinner-red-only">
+    <div class="spinner-layer spinner-blue-only">
       <div class="circle-clipper left">
         <div class="circle"></div>
       </div><div class="gap-patch">
@@ -155,7 +155,7 @@
     </div>
   </div>
   <a data-target="peopleForm" class="btn modal-trigger btn-floating btn-large waves-effect 
-  waves-light amber accent-3 float">
+  waves-light pink lighten-4 float">
     <i class="plusIcon material-icons black-text">add</i>
   </a>
 </template>
@@ -164,7 +164,7 @@
   <div id="peopleForm" class="modal peopleForm">
     <div class="modal-content personForm">
 
-      <h5>Person Details</h5>
+      <h5 class="title">Person Details</h5>
       <div class="row fullName">
       <div class="input-field col s12">
         <i class="material-icons prefix">person</i>
@@ -181,21 +181,34 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a id="savebtn" class="modal-close waves-effect waves-light btn-small red darken-3">Save</a>
+      <a id="savebtn" class="modal-close waves-effect waves-light btn-small blue lighten-4 black-text">Save</a>
     </div>
   </div>
 
 
 <!-- People List -->
 <template id="personList">
+  <ul class="collection with-header">
+    <li class="collection-header"><h4 class="peopleTitle">People</h4></li>
+    <div id="birthdayList">
+    <!-- List painted in javascript -->
+    </div>
+  </ul>
+  <div class="fixed-action-btn">
   <a data-target="peopleForm" class="btn modal-trigger btn-floating btn-large waves-effect 
-  waves-light amber accent-3 float">
+  waves-light pink lighten-4 float">
     <i class="plusIcon material-icons black-text">add</i> 
   </a>
-
-
+</div>
 </template>
 
+<!-- trash and gift -->
+<template id="listIcons">
+  <div class="listIcons">
+  <i id="trash" class="small grey lighten-4 material-icons prefix">delete</i>
+  <i id="gift" class="small blue lighten-4 material-icons prefix">card_giftcard</i>
+  </div>
+</template>
 
 
 

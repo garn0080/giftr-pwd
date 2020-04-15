@@ -161,11 +161,15 @@ const app = {
         fetch(req)
         .then(resp => resp.json())
         .then( people => {
-            console.log(people)
+            let main = document.querySelector('main');
             if (people.data.length == 0 ){
+                main.setAttribute('data-status', 'noPeopleYet');
                 app.noPeopleYet();
             }else{
+                main.setAttribute('data-status', 'personAlreadyStored');
                 app.personAlreadyStored();
+                app.paintList(people);
+                app.addPerson(); 
                 //hacer esto despues si hay personas creadas en la base de datos
             }
         })
@@ -187,12 +191,47 @@ const app = {
         let temp = document.getElementById('personList');
         let div = temp.content.cloneNode(true);
         main.appendChild(div);
+    },
 
-        app.addPerson();  
+    
+    paintList: function(people) { // Paint people existing in database
+
+        let peopleArray = people.data;
+        console.log(peopleArray);
+
+        let birthdayList = document.getElementById("birthdayList");
+        peopleArray.forEach(element => {
+
+            // set  and format Time
+            let day = new Date(element.birthDate);
+            let formatted = new Intl.DateTimeFormat('en-CA', { timeZone:'UTC', month: 'long',day: 'numeric'}).format(day);
+
+            let li = document.createElement('li'); //Create li to store name and birthday.
+            let div = document.createElement('div');
+            let name = document.createElement('h6');
+            let birthday = document.createElement('p');
+            let temp = document.getElementById('listIcons');
+            let listIcons = temp.content.cloneNode(true);
+
+            li.setAttribute("class", "collection-item"); 
+            li.setAttribute('id', 'personContainer');
+            li.setAttribute('data-id', `${element._id}`);
+            name.textContent = element.name;
+            birthday.textContent = formatted;
+
+            div.appendChild(name);
+            div.appendChild(birthday);
+            li.appendChild(div);
+            li.appendChild(listIcons);
+            birthdayList.appendChild(li); // append to html div
+        });
+
+        app.deletePerson();
+
     },
 
 
-    addPerson: function() {
+    addPerson: function() {                  // floating button post person
          // float button initialization
         var elems = document.querySelectorAll('.modal');
         M.Modal.init(elems);
@@ -228,14 +267,93 @@ const app = {
             .then(resp => resp.json())
             .then( person => {
             console.log(person)
+
+            let main = document.querySelector('main');
+            let prop = main.getAttribute('data-status');
+            if (prop == 'noPeopleYet')
+            { 
+                main.textContent = "";
+                main.setAttribute('data-status', 'personAlreadyStored')
+                app.personAlreadyStored();
+                
+            }
+
+            let data = person.data;
+            paintPerson(data);
+
             })
             .catch(err => console.log(err))
 
+        }
 
+        function paintPerson(data) {        //Paint person from float button request
+               // set  and format Time
+               let birthdayList = document.getElementById("birthdayList");
+               let day = new Date(data.birthDate);
+               let formatted = new Intl.DateTimeFormat('en-CA', { timeZone:'UTC', month: 'long',day: 'numeric'}).format(day);
+   
+               let li = document.createElement('li'); //Create li to store name and birthday.
+               let div = document.createElement('div');
+               let name = document.createElement('h6');
+               let birthday = document.createElement('p');
+               let temp = document.getElementById('listIcons');
+               let listIcons = temp.content.cloneNode(true);
+   
+               li.setAttribute("class", "collection-item"); 
+               li.setAttribute('id', 'personContainer');
+               li.setAttribute('data-id', `${data._id}`);
+               name.textContent = data.name;
+               birthday.textContent = formatted;
+   
+               div.appendChild(name);
+               div.appendChild(birthday);
+               li.appendChild(div);
+               li.appendChild(listIcons);
+               birthdayList.appendChild(li); // append to html div
+
+               app.deletePerson();
         }
      
-    }
+    },
 
+    deletePerson: function() {
+
+        let deletebtn = document.querySelectorAll('#trash');
+        deletebtn.forEach( icon => {
+            icon.addEventListener('click', deletePerson);
+        })
+        
+
+        function deletePerson(){
+
+            let headers = new Headers();
+            headers.append('X-Made-By-Mariana', 'true');
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', `Bearer ${app.TOKEN}`);
+    
+            let url = `${app.url}api/people`;
+    
+            let req = new Request(url, {
+            headers: headers,
+            mode: 'cors',
+            method: 'DELETE'
+            });
+
+            fetch(req)
+            .then(resp => resp.json())
+            .then( person => {
+            console.log(person)})
+            .catch(console.error)
+
+        }
+
+
+
+
+
+
+
+    }
 
 
 
