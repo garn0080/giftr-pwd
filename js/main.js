@@ -148,6 +148,7 @@ const app = {
         let token = JSON.parse(sessionStorage.getItem(app.tokenKey)); // get user token
         app.TOKEN = token;
         let headers = new Headers();
+        headers.append('X-Made-By-Mariana', 'true');
         headers.append('Authorization', `Bearer ${app.TOKEN}`);
         
         let url = `${app.url}api/people`;

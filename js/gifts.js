@@ -29,6 +29,8 @@ const app = {
     getProfiles: function() {
 
         let headers = new Headers();
+        headers.append('X-Made-By-Mariana', 'true');
+        headers.append('Content-Type', 'application/json');
         headers.append('Authorization', `Bearer ${app.TOKEN}`);
         
         let url = `${app.url}api/people/${app.ID}`;
@@ -82,12 +84,16 @@ const app = {
             let giftWebSite = document.getElementById('webSite').value;
 
             
-            let num = giftPrice*100;
+            let num = parseInt(giftPrice*100);
+            
             
             let headers = new Headers();
+            headers.append('X-Made-By-Mariana', 'true');
+            headers.append('Content-Type', 'application/json');
             headers.append('Authorization', `Bearer ${app.TOKEN}`);
             
             let url = `${app.url}api/people/${app.ID}/gifts`;
+            debugger;
 
             let data = {
                 name: giftName,
@@ -96,7 +102,7 @@ const app = {
                 store: {
                     name: giftStore,
                     productURL: giftWebSite
-                },
+                }
             }
     
             let req = new Request(url, {
