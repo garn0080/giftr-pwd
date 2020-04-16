@@ -88,10 +88,17 @@ nav .sidenav-trigger{
 .collection-item p {
     margin: 10px 0px;
 }
-#personContainer{
+#personContainer, #giftContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+#giftContainer p {
+    margin: 5px 0px;
+
+}
+.storeP {
+    font-style: oblique;
 }
 .listIcons{
     padding-top: 10px;
