@@ -54,7 +54,7 @@ const app = {
                 let div = temp.content.cloneNode(true);
                 main.appendChild(div);
 
-                app.addGift(); // trigger add button
+                app.addGift(); // trigger float button
 
             }else{
 
@@ -64,7 +64,7 @@ const app = {
                 main.appendChild(div);
 
                 app.paintList(giftsArray);
-                app.addGift(); // trigger add button
+                app.addGift(); // trigger float button
            
             }
         })
@@ -156,8 +156,8 @@ const app = {
              let giftName = document.createElement('h6');
              let giftPrice = document.createElement('p');
              let giftStore = document.createElement('p');
-             giftStore.setAttribute('class', 'storeP')
-             let temp = document.getElementById('listIcons');
+             giftStore.setAttribute('class', 'storeP');
+             let temp = document.getElementById('listIcon');
              let listIcons = temp.content.cloneNode(true);
 
               // assigna los valores de la base de datos a los elementos html
@@ -169,7 +169,7 @@ const app = {
             giftStore.textContent = gift.store.name;
 
             // guarda en el div contenedor
-            let giftList = document.getElementById('giftsList'); 
+            let giftList = document.getElementById('ideasList'); 
             div.appendChild(giftName);
             div.appendChild(giftPrice);
             div.appendChild(giftStore);
@@ -186,7 +186,8 @@ const app = {
 
     paintList: function(giftsArray){ // Paint gift list from database array
 
-        let giftList = document.getElementById('giftsList'); 
+        let ideasList = document.getElementById('ideasList'); 
+
         giftsArray.forEach(element => {
 
            // data traida de la base de datos
@@ -196,7 +197,7 @@ const app = {
             let money = new Intl.NumberFormat('en-CA', opts).format(precio);
 
 
-           // elementos html creados para guardar regalos
+           // elementos html creados para guardar datos del regalo
             let li = document.createElement('li'); //Create li to store gift details.
             let div = document.createElement('div');
             let giftName = document.createElement('h6');
@@ -221,20 +222,53 @@ const app = {
             div.appendChild(giftStore);
             li.appendChild(div);
             li.appendChild(listIcons);
-            giftList.appendChild(li); 
-  
-            app.deleteGift();
+            ideasList.appendChild(li); 
 
         });
+
+
+            app.deleteGift();
     },
 
     deleteGift: function() {
         
-        let icons = document.querySelectorAll('#deleteGift');
-        console.log(icons)
+        let deleteIcons = document.querySelectorAll('#trash');
+        deleteIcons.forEach( icon =>  app.deleteIdea(icon))
         
     },
 
+    deleteIdea: function(icon) {
+
+        icon.addEventListener('click', () => { 
+            let parent = icon.parentNode.parentNode;
+            let giftid = parent.getAttribute('data-id');
+            console.log(giftid);
+
+            let headers = new Headers();
+            headers.append('X-Made-By-Mariana', 'true');
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', `Bearer ${app.TOKEN}`);
+    
+            let url = `${app.url}api/people/${app.ID}/gifts/${giftid}`;
+    
+            let req = new Request(url, {
+            headers: headers,
+            mode: 'cors',
+            method: 'DELETE'    // delete from Database
+            });
+
+            fetch(req)
+            .then(resp => resp.json())
+            .then( person => {
+            console.log(person)})
+            .catch(console.error)
+
+            parent.parentNode.removeChild(parent); // delete from screen
+
+        } )
+
+
+    }
    
 
 
