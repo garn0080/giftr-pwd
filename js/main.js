@@ -3,10 +3,13 @@ const app = {
     url: "https://giftr.mad9124.rocks/",
     tokenKey: "TOKEN",
     TOKEN: null,
+    deferredPrompt: null,
+
     init: function(){
         app.welcomePage();
         app.authenticationForms(); 
         app.listeners();
+        app.install();
            
     },
     welcomePage: function() {
@@ -144,6 +147,7 @@ const app = {
         let div = temp.content.cloneNode(true);
 
         header.appendChild(div); // logOut navigation
+        app.logOut();
 
         let token = JSON.parse(sessionStorage.getItem(app.tokenKey)); // get user token
         app.TOKEN = token;
@@ -380,15 +384,52 @@ const app = {
         })
         // quede en mandar el id the el div selecionado al session storage para
         //despues usarlo en la otra pagina gifts.html
+    },
+
+
+    logOut:function() {
+        let btn = document.getElementById('logout');
+        btn.addEventListener('click', () => {
+
+            setTimeout(() => {
+    
+                // eliminar data de session storage
+                sessionStorage.clear(); 
+    
+                let header = document.querySelector('header');
+                let main = document.querySelector('main');
+
+                //limpiar main y header
+                header.textContent = "";
+                main.textContent = "";
+
+                // copia de templates de la pagina 1, pagina de bienvenida 
+                let temp = document.getElementById('loginRegister');
+                let loginRegister = temp.content.cloneNode(true);
+                let temp2 = document.getElementById('welcome');
+                let welcome = temp2.content.cloneNode(true);
+
+                //adicionar a tags de html
+                header.appendChild(loginRegister);
+                main.appendChild(welcome);
+
+                
+    
+            }, 1000)
+    
+        } )
+
+    },
+
+    install: function()
+    {
+        
     }
 
 
 
 
-
-
-
-
+    
     
 
 

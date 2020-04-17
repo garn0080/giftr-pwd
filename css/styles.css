@@ -109,3 +109,11 @@ nav .sidenav-trigger{
     border-radius: 10px;
     font-size: 32px !important;
 }
+.collection-header{
+    display: flex;
+    flex-direction: row;
+}
+.backIcon{
+  padding: 20px 20px 0px 0px;
+  
+}

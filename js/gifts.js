@@ -7,7 +7,8 @@ const app = {
     init: function() {
         app.getToken();
         app.getId();
-        app.getPerson(); // GET the person data with gift arrays.
+        app.getPerson(); // GET the person data with gifts array.
+        app.logOut();
     },
 
     getToken: function() {
@@ -128,7 +129,11 @@ const app = {
                 { 
                     main.textContent = "";
                     main.setAttribute('data-status', 'giftsAlreadyStored')
-                    // app.personAlreadyStored();
+                    //copy template
+                   
+                    let temp = document.getElementById('giftsList');
+                    let div = temp.content.cloneNode(true);
+                    main.appendChild(div);
                     
                 }
                 
@@ -268,8 +273,18 @@ const app = {
         } )
 
 
+    },
+
+    logOut: function() {
+
+        let btn = document.getElementById('logout');
+        btn.addEventListener('click', () => {
+
+        // eliminar data de session storage
+        sessionStorage.clear(); 
+
+        })
     }
-   
 
 
 }
